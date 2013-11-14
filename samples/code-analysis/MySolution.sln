@@ -3,6 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyProject", "src\MyProject\MyProject.csproj", "{2F734719-A61F-4B81-A13A-7EB71119EC63}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E23F141-5CE3-42F6-B017-B58863C94A3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{8D732A56-B6F5-48A6-99C0-0D7B8185AFBA}"
+	ProjectSection(SolutionItems) = preProject
+		src\Solution.ruleset = src\Solution.ruleset
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D732A56-B6F5-48A6-99C0-0D7B8185AFBA} = {1E23F141-5CE3-42F6-B017-B58863C94A3B}
 	EndGlobalSection
 EndGlobal
