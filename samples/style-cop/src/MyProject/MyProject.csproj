@@ -42,6 +42,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+    <StyleCopEnabled>false</StyleCopEnabled>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
