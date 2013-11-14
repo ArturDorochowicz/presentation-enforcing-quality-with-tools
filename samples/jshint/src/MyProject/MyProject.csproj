@@ -253,7 +253,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include=".jshintignore" />
+    <None Include=".jshintrc" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <None Include="Gruntfile.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
