@@ -8,7 +8,8 @@ module.exports = function (grunt) {
         jshint: {
             all: ['**/*.js'],
             options: {
-                jshintrc: true
+                jshintrc: true,
+                reporter: grunt.option('msbuild') ? '../jshint-msbuild-reporter.js' : undefined
             }
         }
     });

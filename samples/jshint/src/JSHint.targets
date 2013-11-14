@@ -13,7 +13,7 @@
 
   <Target Name="JSHint" Condition="'$(JSHintEnabled)' != 'false'">
     <PropertyGroup>
-      <_Command>"$(MSBuildThisFileDirectory)..\node_modules\.bin\grunt" jshint --no-color</_Command>
+      <_Command>"$(MSBuildThisFileDirectory)..\node_modules\.bin\grunt" jshint --no-color --msbuild</_Command>
     </PropertyGroup>
 
     <Exec Command="$(_Command)" />
