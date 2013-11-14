@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{8D732A56-B6F5-48A6-99C0-0D7B8185AFBA}"
 	ProjectSection(SolutionItems) = preProject
 		src\Solution.ruleset = src\Solution.ruleset
+		src\SolutionDictionary.xml = src\SolutionDictionary.xml
 	EndProjectSection
 EndProject
 Global
