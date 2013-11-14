@@ -343,4 +343,5 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Import Project="..\JSHint.targets" />
 </Project>

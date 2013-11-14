@@ -1,0 +1,22 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <JSHintEnabled Condition="'$(JSHintEnabled)' == ''">false</JSHintEnabled>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BuildDependsOn>
+      $(BuildDependsOn);
+      JSHint;
+    </BuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="JSHint" Condition="'$(JSHintEnabled)' != 'false'">
+    <PropertyGroup>
+      <_Command>"$(MSBuildThisFileDirectory)..\node_modules\.bin\grunt" jshint</_Command>
+    </PropertyGroup>
+
+    <Exec Command="$(_Command)" />
+  </Target>
+
+</Project>
