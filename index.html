@@ -52,7 +52,7 @@
             <h2>Principles</h2>
             <ol>
                 <li>Automated, included in the build</li>
-                <li>Fail the build on violations</li>
+                <li>Enforcement - violations fail the build</li>
                 <li>Available in Visual Studio</li>
                 <li>Per project settings, with shared defaults</li>
             </ol>
@@ -60,6 +60,16 @@
 
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
             <h2>Visual Studio Code Analysis</h2>
+        </section>
+
+        <section>
+            <h2>What's wrong with this code?</h2>
+            <pre><code data-trim contenteditable>
+using (var smtp = new SmtpClient { Host = "smtp.gmail.com" })
+{
+    smtp.Send("from@from.com", "to@to.com", "subject", "body");
+}
+            </code></pre>
         </section>
 
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
@@ -71,11 +81,24 @@
         </section>
 
         <section>
+            <h2>What's wrong with this code?</h2>
+            <pre><code data-trim contenteditable>
+function calculateCost(order) {
+    return
+        order.getProductsTotal() +
+        order.getShippingCost();
+}
+            </code></pre>
+        </section>
+
+        <section>
             <h1>Enforcing Quality with Tools</h1>
             <h3>Artur Dorochowicz</h3>
             <p>
-                <a href="https://github.com/ArturDorochowicz/presentation-enforcing-quality-with-tools" target="_blank">
-                    https://github.com/ArturDorochowicz/presentation-enforcing-quality-with-tools</a>
+                <small>
+                    <a href="https://github.com/ArturDorochowicz/presentation-enforcing-quality-with-tools" target="_blank">
+                        https://github.com/ArturDorochowicz/presentation-enforcing-quality-with-tools</a>
+                </small>
             </p>
         </section>
 
