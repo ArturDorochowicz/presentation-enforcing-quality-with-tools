@@ -51,7 +51,7 @@
         <section>
             <h2>Principles</h2>
             <ol>
-                <li>Automated, included in the build</li>
+                <li>Automation - tool is part of the build</li>
                 <li>Enforcement - violations fail the build</li>
                 <li>Available in Visual Studio</li>
                 <li>Per project settings, with shared defaults</li>
@@ -70,6 +70,19 @@ using (var smtp = new SmtpClient { Host = "smtp.gmail.com" })
     smtp.Send("from@from.com", "to@to.com", "subject", "body");
 }
             </code></pre>
+        </section>
+
+        <section>
+            <h2>Code Analysis</h2>
+            <ul>
+                <li>Static analysis tool of managed assemblies - analyses binaries</li>
+                <li>Validates against .NET Framework Design Guidelines</li>
+                <li>Integrated into Visual Studio and the build system</li>
+                <li>In VS2010 available only in Premium and Ultimate</li>
+                <li>In VS2012 available in all paid editions as well as in Express with limited number of rules</li>
+                <li>FxCop - standalone analysis tool (fxcopcmd.exe) with somewhat different set of rules <br/>
+                    Available in Microsoft Download Center and in Windows SDK; Microsoft is phasing it out</li>
+            </ul>
         </section>
 
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
