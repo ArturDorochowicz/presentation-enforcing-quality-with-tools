@@ -87,6 +87,18 @@ using (var smtp = new SmtpClient { Host = "smtp.gmail.com" })
             </ul>
         </section>
 
+        <section>
+            <h2>Installation</h2>
+            <ul>
+                <li>Nothing to install - Code Analysis is part of the build out of the box</li>
+                <li>Integration with the build is governed by an MSBuild project file</li>
+                <li>Available configuration options can be discovered from here</li>
+            </ul>
+            <pre><code data-trim contenteditable>
+$(MSBuildExtensionPath)\Microsoft\VisualStudio\v11.0\CodeAnalysis\Microsoft.CodeAnalysis.Targets
+            </code></pre>
+        </section>
+
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
             <h2>StyleCop</h2>
         </section>
