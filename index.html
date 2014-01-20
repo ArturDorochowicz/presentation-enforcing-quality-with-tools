@@ -113,6 +113,30 @@ $(MSBuildExtensionPath)\Microsoft\VisualStudio\v11.0\CodeAnalysis\Microsoft.Code
             </ul>
         </section>
 
+        <section>
+            <h2>Installation</h2>
+            <p>Install <a href="https://www.nuget.org/packages/StyleCop.MSBuild/" target="_blank">StyleCop.MSBuild</a> NuGet package into each project where the analysis is desired</p>
+            <pre><code data-trim contenteditable>
+PM> Install-Package StyleCop.MSBuild
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>MSBuild Properties</h2>
+            <ul>
+                <li><em>StyleCopEnabled</em> - enables the analysis, <em>true</em> by default which makes the analysis run on each build</li>
+                <li><em>StyleCopTreatErrorsAsWarnings</em> - report issues as warnings, <em>true</em> by default</li>
+            </ul>
+
+            <p>Recommended settings should be added to each project file manually</p>
+            <pre><code data-trim contenteditable>
+&lt;PropertyGroup>
+    &lt;StyleCopEnabled>false&lt;/StyleCopEnabled>
+    &lt;StyleCopTreatErrorsAsWarnings>false&lt;/StyleCopTreatErrorsAsWarnings>
+&lt;/PropertyGroup>
+            </pre></code>
+        </section>
+
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
             <h2>JSHint</h2>
         </section>
