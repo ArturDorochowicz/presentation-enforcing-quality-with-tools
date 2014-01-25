@@ -144,6 +144,71 @@ PM> Install-Package StyleCop.MSBuild
                 StyleCopTreatErrorsAsWarnings = false - since we want to enforce the quality and break the build when violations are found.
             </aside>
         </section>
+
+        <section>
+            <h2>Visual Studio integration</h2>
+            <p>
+                Integration makes it easier to configure StyleCop, but is irrelevant for the analysis during the build.
+            </p>
+            <p>
+                Installer at <a href="https://stylecop.codeplex.com/" target="_blank">stylecop.codeplex.com</a> includes Visual Studio extension,
+                JetBrains ReSharper plugin as well as StyleCop MSBuild targets.
+            </p>
+
+            <aside class=notes>
+                Installed StyleCop MSBuild targets are irrelevant here due to the use of NuGet package for automatic analysis execution during the build.
+            </aside>
+        </section>
+
+        <section>
+            <h2>Configuration</h2>
+            <p>
+                By default StyleCop searches for the configuration files &mdash; <em>Settings.StyleCop</em> &mdash; from the project directory up.
+            </p>
+            <p>
+                Multiple files are merged from top to bottom allowing for the recommended setup:
+            </p>
+            <ul>
+                <li>common settings file for the solution in the solution directory</li>
+                <li>project specific overrides in each individual project directory</li>
+            </ul>
+
+            <aside class="notes">
+                By default the configuration file search really ends with the default settings file (here: settings file in the <em>tools</em> directory of the StyleCop NuGet package.)
+
+                Default settings of automatically searching in parent directories may potentially result in including unrelated configuration files placed above the solution level
+                and result in different build output depending on build location. This is build nondeterminism and It's a Bad Thing (TM). In reality it's probably not an issue.
+
+                A settings file can be easily created with StyleCop Visual Studio extension -  from project context menu in VS.
+
+                To manage a configuration file without the VS extension: create Settings.StyleCop file with just the root configuration element - &lt;StyleCopSettings/>.
+                Next, run the settings editor on it (it's in the tools directory of the StyleCop NuGet package):
+                > StyleCopSettingsEditor.exe path/to/created/settings/file.
+            </aside>
+        </section>
+
+        <section>
+            <h2>Introducing to legacy projects</h2>
+            <p>
+                StyleCop Visual Studio extension allows to exclude individual files from the analysis.
+            </p>
+            <pre><code data-trim contenteditable>
+&lt;Compile Include="ThisFileIsExludedFromStyleCop.cs">
+    &lt;ExcludeFromStyleCop>True&lt;/ExcludeFromStyleCop>
+&lt;/Compile>
+            </code></pre>
+            <p>
+                Use <em>ExcludeFromStyleCop</em> tool for mass exclusion.
+            </p>
+            <ul>
+                <li><a href="http://blogs.msdn.com/b/sourceanalysis/archive/2008/11/11/introducing-stylecop-on-legacy-projects.aspx" target="_blank">Introducing StyleCop on Legacy Projects</a></li>
+                <li><a href="https://stylecop.codeplex.com/releases/view/48036" target="_blank">StyleCop 4.3 Release Download</a></li>
+                <li><a href="https://stylecop.codeplex.com/downloads/get/129745" target="_blank">ExcludeFromStyleCop</a></li>
+            </ul>
+
+            <aside class="notes">
+                ExcludeFromStyleCop tool needs to be compiled - it's made available in source code form only.
+            </aside>
         </section>
 
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
