@@ -156,14 +156,14 @@ PM> Install-Package StyleCop.MSBuild
             </p>
 
             <aside class=notes>
-                Installed StyleCop MSBuild targets are irrelevant here due to the use of NuGet package for automatic analysis execution during the build.
+                Installed StyleCop MSBuild targets are irrelevant here due to the use of NuGet package for analysis during the build.
             </aside>
         </section>
 
         <section>
             <h2>Configuration</h2>
             <p>
-                By default StyleCop searches for the configuration files &mdash; <em>Settings.StyleCop</em> &mdash; from the project directory up.
+                By default StyleCop searches for configuration files &mdash; <em>Settings.StyleCop</em> &mdash; from the project directory up.
             </p>
             <p>
                 Multiple files are merged from top to bottom allowing for the recommended setup:
@@ -179,18 +179,57 @@ PM> Install-Package StyleCop.MSBuild
                 Default settings of automatically searching in parent directories may potentially result in including unrelated configuration files placed above the solution level
                 and result in different build output depending on build location. This is build nondeterminism and It's a Bad Thing (TM). In reality it's probably not an issue.
 
-                A settings file can be easily created with StyleCop Visual Studio extension -  from project context menu in VS.
+                A settings file can be easily created with StyleCop Visual Studio extension - from project context menu in VS.
 
                 To manage a configuration file without the VS extension: create Settings.StyleCop file with just the root configuration element - &lt;StyleCopSettings/>.
                 Next, run the settings editor on it (it's in the tools directory of the StyleCop NuGet package):
-                > StyleCopSettingsEditor.exe path/to/created/settings/file.
+                > StyleCopSettingsEditor.exe path/to/created/settings/file
             </aside>
+        </section>
+
+        <section>
+            <h2>Rules</h2>
+            <p>The default rule set includes all of the rules</p>
+            <p>Consider disabling some of them:</p>
+            <ul>
+                <li>Documentation rules</li>
+                <li><em>UsingDirectivesMustBePlacedWithinNamespace</em></li>
+                <li><em>AccessModifierMustBeDeclared</em></li>
+                <li><em>PrefixLocalCallsWithThis</em>, <em>PrefixCallsCorrectly</em>, <em>FieldNamesMustNotBeginWithUnderscore</em></li>
+            </ul>
+
+            <aside class="notes">
+                UsingDirectivesMustBePlacedWithinNamespace - even VS templates don't follow this rule
+                AccessModifierMustBeDeclared - less code ceremony
+                PrefixLocalCallsWithThis, PrefixCallsCorrectly, FieldNamesMustNotBeginWithUnderscore - no need for <em>this.</em> or <em>base.</em> unless really required
+            </aside>
+        </section>
+
+        <section>
+            <h2>Suppressing violations</h2>
+            <p>Violations can be selectively suppressed with Code Analysis' <em>SuppressMessage</em> attribute</p>
+            <pre><code data-trim contenteditable>
+[System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "StyleCop.CSharp.OrderingRules", 
+    "SA1202:ElementsMustBeOrderedByAccess",
+    Justification = "Optional, but you should always provide one.")]
+public class MyClass
+{
+    static void PrivateBeforePublic()
+    {
+    }
+
+    public static void Public()
+    {
+    }
+}
+            </code></pre>
         </section>
 
         <section>
             <h2>Introducing to legacy projects</h2>
             <p>
-                StyleCop Visual Studio extension allows to exclude individual files from the analysis.
+                StyleCop Visual Studio extension allows to exclude individual files from the analysis
             </p>
             <pre><code data-trim contenteditable>
 &lt;Compile Include="ThisFileIsExludedFromStyleCop.cs">
@@ -198,7 +237,7 @@ PM> Install-Package StyleCop.MSBuild
 &lt;/Compile>
             </code></pre>
             <p>
-                Use <em>ExcludeFromStyleCop</em> tool for mass exclusion.
+                Use <em>ExcludeFromStyleCop</em> tool for mass exclusion
             </p>
             <ul>
                 <li><a href="http://blogs.msdn.com/b/sourceanalysis/archive/2008/11/11/introducing-stylecop-on-legacy-projects.aspx" target="_blank">Introducing StyleCop on Legacy Projects</a></li>
@@ -209,6 +248,27 @@ PM> Install-Package StyleCop.MSBuild
             <aside class="notes">
                 ExcludeFromStyleCop tool needs to be compiled - it's made available in source code form only.
             </aside>
+        </section>
+
+        <section>
+            <h2>ReSharper integration</h2>
+            <p>Plugin for ReSharper does not use <em>Settings.StyleCop</em> files &mdash; matching configuration must be specified again in ReSharper options.</p>
+            <p>The division of StyleCop settings into solution and project level settings files can be matched with ReSharper team-shared solution level and project level settings and committing them to source control.</p>
+            <ul>
+                <li><a href="http://blog.jetbrains.com/dotnet/2011/11/22/resharper-settings-in-61/" target="_blank">ReSharper Settings - JetBrains blog</a></li>
+                <li><a href="https://jkanczler.wordpress.com/2013/09/27/share-style-cop-compatible-resharper-settings-between-different-machines/" target="_blank">Share Style Cop compatible ReSharper settings between different machines - József Kanczler</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Execution</h2>
+            <p>Example command line</p>
+            <pre><code data-trim contenteditable>
+msbuild MySolution.sln
+    /target:Build
+    /property:Configuration=Release
+    /property:StyleCopEnabled=true
+            </pre></code>
         </section>
 
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
