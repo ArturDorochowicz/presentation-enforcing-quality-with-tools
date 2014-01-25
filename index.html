@@ -138,6 +138,12 @@ PM> Install-Package StyleCop.MSBuild
     &lt;StyleCopTreatErrorsAsWarnings>false&lt;/StyleCopTreatErrorsAsWarnings>
 &lt;/PropertyGroup>
             </pre></code>
+
+            <aside class="notes">
+                StyleCopEnabled = false - it's probably a bit too cumbersome to have StyleCop run on each build.
+                StyleCopTreatErrorsAsWarnings = false - since we want to enforce the quality and break the build when violations are found.
+            </aside>
+        </section>
         </section>
 
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
