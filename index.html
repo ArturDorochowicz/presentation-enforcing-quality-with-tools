@@ -355,10 +355,6 @@ copy path\to\node.exe node_modules\.bin\
                 Multiple .jshintrc files may exist in different directories.
                 JSHint picks the nearest one (traversing directories up) relative to the file being linted.
                 (Does it merge .jshintrc files???)
-
-                Configuration may be overridden inline in script files (overrides have function scope), e.g.:
-                /* jshint undef: true, unused: true */
-                /* global MY_GLOBAL */
             </aside>
         </section>
 
@@ -403,6 +399,23 @@ module.exports = function (grunt) {
             <aside class="notes">
                 Gruntfile.js is specific to the web project. Paths are relative to the project directory.
             </aside>
+        </section>
+
+        <section>
+            <h2>Suppressing violations</h2>
+            <p>Inline configuration in script file &mdash; override has function scope</p>
+            <pre><code data-trim contenteditable>
+/* jshint undef: true, unused: true */
+/* global MY_GLOBAL */
+            </code></pre>
+
+            <p>Ignore a piece of code altogether</p>
+            <pre><code data-trim contenteditable>
+// Code here will be linted with JSHint.
+/* jshint ignore:start */
+// Code here will be ignored by JSHint.
+/* jshint ignore:end */
+            </code></pre>
         </section>
 
         <section>
