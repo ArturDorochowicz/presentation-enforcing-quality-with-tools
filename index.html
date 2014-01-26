@@ -286,15 +286,146 @@ function calculateCost(order) {
             </code></pre>
         </section>
 
-
         <section>
             <h2>JSHint</h2>
             <ul>
                 <li><q>JSHint, a JavaScript Code Quality Tool</q> - <a href="http://www.jshint.com" target="_blank">www.jshint.com</a></li>
                 <li>JavaScript analysis tool, detects errors and potential problems</li>
-                <li>There is some code style verification, but it will be removed in a future version</li>
+                <li>Little code style verification, will be removed in a future version</li>
                 <li>Community fork of Douglas Crockford's <a href="http://www.jslint.com/" target="_blank">JSLint</a></li>
             </ul>
+        </section>
+
+        <section>
+            <h2>Installation</h2>
+            <pre><code data-trim contenteditable>
+mkdir node_modules
+npm install grunt
+npm install grunt-cli
+npm install grunt-contrib-jshint
+copy path\to\node.exe node_modules\.bin\
+            </pre></code>
+
+            <aside class="notes">
+                JSHint npm package contains the analysis library as well as a node command line interface.
+                However, we choose to use JSHint via Grunt - a popular "JavaScript Task Runner".
+
+                1. Create node_modules directory in the solution directory.
+                   When npm is run somewhere inside the solution directory, it will search up for existing node_modules directory and install the package there.
+                2. Need to have npm (and of course node) installed on the developer's machine for the installation of the packages.
+                3. Grunt packages 0.4.1 and earlier don't have a patch for a longstanding issue with redirected output in node on Windows.
+                   We want version 0.4.2+. See: https://github.com/gruntjs/grunt/issues/921
+                4. Normally grunt-cli would be installed as a global module (npm install grunt-cli -g). Here it's needed on the build server,
+                   therefore it's installed locally and committed to the source control.
+
+                Commit node_modules to source control.
+            </aside>
+        </section>
+
+        <section>
+            <h2>Configuration: .jshintrc</h2>
+            <pre><code data-trim contenteditable>
+{
+// Enforcing
+ "newcap"   : true,  // Require capitalization of all constructor functions e.g. `new F()`
+ "undef"    : true,  // Require all non-global variables to be declared (prevents global leaks)
+ "strict"   : true,  // Requires all functions run in ES5 Strict Mode
+  /* ... */
+// Relaxing
+ "asi"      : false, // Tolerate Automatic Semicolon Insertion (no semicolons)
+ "debug"    : false, // Allow debugger statements e.g. browser breakpoints.
+ "evil"     : false, // Tolerate use of `eval` and `new Function()`
+  /* ... */
+// Environments
+ "browser"  : true,  // Web Browser (window, document, etc)
+// Custom Globals
+ "globals" : {}      // additional predefined global variables
+}
+            </pre></code>
+            <p>
+                <a href="http://www.jshint.com/docs/options" target="_blank"><small>http://www.jshint.com/docs/options</small></a> </br>
+                <a href="https://github.com/jshint/jshint/blob/master/examples/.jshintrc" target="_blank"><small>Defaults: https://github.com/jshint/jshint/blob/master/examples/.jshintrc</small></a> </br>
+            </p>
+
+            <aside class="notes">
+                JSHint picks up <em>.jshintrc</em> files for configuration options.
+
+                In general, start with enabling all enforcing options and disabling all relaxing options, then adjust to the needs of the project.
+
+                Multiple .jshintrc files may exist in different directories.
+                JSHint picks the nearest one (traversing directories up) relative to the file being linted.
+                (Does it merge .jshintrc files???)
+
+                Configuration may be overridden inline in script files (overrides have function scope), e.g.:
+                /* jshint undef: true, unused: true */
+                /* global MY_GLOBAL */
+            </aside>
+        </section>
+
+        <section>
+            <h2>Configuration: .jshintignore</h2>
+            <pre><code data-trim contenteditable>
+# Exclude libraries, third party code
+# and other files that shouldn't be checked
+Scripts/lib/**
+
+# Prevent checking VS compilation output directories
+bin/**
+obj/**
+            </pre></code>
+
+            <aside class="notes">
+                JSHint picks up <em>.jshintignore</em> for files to exclude from the analysis.
+                This is similar to .gitignore.
+            </aside>
+        </section>
+
+        <section>
+            <h2>Configuration: Gruntfile.js</h2>
+            <pre><code data-trim contenteditable>
+module.exports = function (grunt) {
+    grunt.initConfig({
+        jshint: {
+            all: ['**/*.js'],
+            options: {
+                jshintrc: true
+            }
+        }
+    });
+    grunt.loadTasks('../../node_modules/grunt-contrib-jshint/tasks');
+};
+            </pre></code>
+
+            <p>
+                <a href="https://github.com/gruntjs/grunt-contrib-jshint" target="_blank"><small>https://github.com/gruntjs/grunt-contrib-jshint</small></a>
+            </p>
+
+            <aside class="notes">
+                Gruntfile.js is specific to the web project. Paths are relative to the project directory.
+            </aside>
+        </section>
+
+        <section>
+            <h2>How to marry Grunt with MSBuild?</h2>
+            <ol>
+                <li>Create a custom JSHint reporter which outputs notifications in a format recognized by MSBuild and Visual Studio</li>
+                <li>Create MSBuild targets file that executes Grunt</li>
+                <li>Import the targets into the web project</li>
+            </ol>
+            <p>
+                See the accompanying JSHint sample for details.
+            </p>
+        </section>
+
+        <section>
+            <h2>Execution</h2>
+            <p>Example command line</p>
+            <pre><code data-trim contenteditable>
+msbuild MySolution.sln
+    /target:Build
+    /property:Configuration=Release
+    /property:JSHintEnabled=true
+            </pre></code>
         </section>
 
         <section>
