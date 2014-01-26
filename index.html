@@ -137,7 +137,7 @@ PM> Install-Package StyleCop.MSBuild
     &lt;StyleCopEnabled>false&lt;/StyleCopEnabled>
     &lt;StyleCopTreatErrorsAsWarnings>false&lt;/StyleCopTreatErrorsAsWarnings>
 &lt;/PropertyGroup>
-            </pre></code>
+            </code></pre>
 
             <aside class="notes">
                 StyleCopEnabled = false - it's probably a bit too cumbersome to have StyleCop run on each build.
@@ -268,7 +268,7 @@ msbuild MySolution.sln
     /target:Build
     /property:Configuration=Release
     /property:StyleCopEnabled=true
-            </pre></code>
+            </code></pre>
         </section>
 
         <section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
@@ -304,7 +304,7 @@ npm install grunt
 npm install grunt-cli
 npm install grunt-contrib-jshint
 copy path\to\node.exe node_modules\.bin\
-            </pre></code>
+            </code></pre>
 
             <aside class="notes">
                 JSHint npm package contains the analysis library as well as a node command line interface.
@@ -341,7 +341,7 @@ copy path\to\node.exe node_modules\.bin\
 // Custom Globals
  "globals" : {}      // additional predefined global variables
 }
-            </pre></code>
+            </code></pre>
             <p>
                 <a href="http://www.jshint.com/docs/options" target="_blank"><small>http://www.jshint.com/docs/options</small></a> </br>
                 <a href="https://github.com/jshint/jshint/blob/master/examples/.jshintrc" target="_blank"><small>Defaults: https://github.com/jshint/jshint/blob/master/examples/.jshintrc</small></a> </br>
@@ -372,7 +372,7 @@ Scripts/lib/**
 # Prevent checking VS compilation output directories
 bin/**
 obj/**
-            </pre></code>
+            </code></pre>
 
             <aside class="notes">
                 JSHint picks up <em>.jshintignore</em> for files to exclude from the analysis.
@@ -394,7 +394,7 @@ module.exports = function (grunt) {
     });
     grunt.loadTasks('../../node_modules/grunt-contrib-jshint/tasks');
 };
-            </pre></code>
+            </code></pre>
 
             <p>
                 <a href="https://github.com/gruntjs/grunt-contrib-jshint" target="_blank"><small>https://github.com/gruntjs/grunt-contrib-jshint</small></a>
@@ -443,7 +443,7 @@ msbuild MySolution.sln
     /target:Build
     /property:Configuration=Release
     /property:JSHintEnabled=true
-            </pre></code>
+            </code></pre>
         </section>
 
         <section>
