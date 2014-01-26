@@ -207,7 +207,7 @@ PM> Install-Package StyleCop.MSBuild
 
         <section>
             <h2>Suppressing violations</h2>
-            <p>Violations can be selectively suppressed with Code Analysis' <em>SuppressMessage</em> attribute</p>
+            <p>Selectively suppress violations with Code Analysis' <em>SuppressMessage</em> attribute</p>
             <pre><code data-trim contenteditable>
 [System.Diagnostics.CodeAnalysis.SuppressMessage(
     "StyleCop.CSharp.OrderingRules", 
@@ -252,12 +252,12 @@ public class MyClass
 
         <section>
             <h2>ReSharper integration</h2>
-            <p>Plugin for ReSharper does not use <em>Settings.StyleCop</em> files &mdash; matching configuration needs to be established again in ReSharper options.</p>
+            <p>The plugin does not use <em>Settings.StyleCop</em> files &mdash; matching configuration needs to be established again in ReSharper options.</p>
             <p>The division of StyleCop settings into solution and project level settings files can be matched with ReSharper team-shared solution level and project level settings and committing them to source control.</p>
-            <ul>
-                <li><a href="http://blog.jetbrains.com/dotnet/2011/11/22/resharper-settings-in-61/" target="_blank">ReSharper Settings - JetBrains blog</a></li>
-                <li><a href="https://jkanczler.wordpress.com/2013/09/27/share-style-cop-compatible-resharper-settings-between-different-machines/" target="_blank">Share Style Cop compatible ReSharper settings between different machines - József Kanczler</a></li>
-            </ul>
+            <p>
+                <a href="http://blog.jetbrains.com/dotnet/2011/11/22/resharper-settings-in-61/" target="_blank"><small>ReSharper Settings - JetBrains blog</small></a>
+                <a href="https://jkanczler.wordpress.com/2013/09/27/share-style-cop-compatible-resharper-settings-between-different-machines/" target="_blank"><small>Share StyleCop compatible ReSharper settings between different machines - József Kanczler</small></a>
+            </p>
         </section>
 
         <section>
